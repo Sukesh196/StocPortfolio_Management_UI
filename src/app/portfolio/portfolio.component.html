@@ -1,0 +1,37 @@
+<div class="container">
+  <h1>Stock Portfolio</h1>
+  
+  <form (ngSubmit)="addStock()" #stockForm="ngForm">
+    <label for="symbol">Stock Symbol:</label>
+    <input type="text" id="symbol" [(ngModel)]="newStock.symbol" name="symbol" required />
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" [(ngModel)]="newStock.quantity" name="quantity" required />
+
+    <button type="submit" [disabled]="!stockForm.form.valid">Add Stock</button>
+  </form>
+  
+  <h2>Portfolio</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Symbol</th>
+        <th>Quantity</th>
+        <th>Current Price</th>
+        <th>Total Value</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let stock of portfolio">
+        <td>{{ stock.symbol }}</td>
+        <td>{{ stock.quantity }}</td>
+        <td>{{ stock.price }}</td>
+        <td>{{ stock.totalValue }}</td>
+        <td><button (click)="removeStock(stock)">Remove</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Total Portfolio Value: {{ totalPortfolioValue }}</h3>
+</div>
